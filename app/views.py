@@ -8,7 +8,7 @@ from .models import Todo
 
 @api_view(["GET"])
 def getTodos(request):
-    todo_obj = Todo.objects.all()
+    todo_obj = Todo.objects.all().order_by("-date_created")
     if request.method == "GET":
         serialize = TodoSerializer(todo_obj, many=True)
         return Response(serialize.data, status=status.HTTP_200_OK)
